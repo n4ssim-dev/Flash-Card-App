@@ -36,6 +36,9 @@ def generate_word():
         # Message de fin
         if not french_words:
             print(f"Completed all questions. Mistakes: {len(WORDS_TO_LEARN)}")
+            # Enregistre la liste des mots à apprendre dans un .csv
+            wtl_df = pandas.DataFrame(WORDS_TO_LEARN)
+            wtl_df.to_csv('./data/words_to_learn.csv',index=False)
             return None
 
         random_french_word = random.choice(french_words)
@@ -66,7 +69,6 @@ def flip_card(random_french, associated_english):
 
     # Retourne du côté anglais au bout de 3s
     window.after(3000, lambda e=associated_english: flip_to_english(e))
-
 
 def flip_to_english(english_word):
     # Affiche le côté anglais de la carte
